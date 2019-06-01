@@ -1,0 +1,27 @@
+body {
+  margin-left: 100px;
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid gray;
+}
+
+tr {
+  width: 50%;
+  /* border-bottom: 1px solid gray; */
+}
+
+th {
+  width: 50px;
+}
+
+td {
+  text-align: center;
+}
+
+#tHeader {
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
+
+}
