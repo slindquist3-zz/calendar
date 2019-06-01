@@ -1,16 +1,16 @@
 const renderCalendar = () => {
-
     const months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
-    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const daysOfWeek = ["S", "M", "T", "W", "T", "F", "S"];
 
     const renderTable = () => {
       const table = document.createElement('table');
       table.setAttribute("id", "table");
-      document.body.appendChild(table);
+      document.body.prepend(table);
     }
     renderTable();
 
     const table = document.getElementById('table');
+      //Declared here so that the table exists in the DOM.
 
     const renderDaysOfWeekHeaders = () => {
       const header = document.createElement('tr');
@@ -20,17 +20,18 @@ const renderCalendar = () => {
 
       for (let i = 0; i < daysOfWeek.length; i++) {
         let day = daysOfWeek[i];
-        let dayText = daysOfWeek[i][0];
         let th = document.createElement('th');
         th.setAttribute('id', day)
-        th.appendChild(document.createTextNode(dayText))
+        th.appendChild(document.createTextNode(day))
         headerEl.appendChild(th);
       }
     }
 
     let today = new Date();
     const firstDayOfMonth = new Date();
-      firstDayOfMonth.setDate(today.getDate() - today.getDate() + 1);
+    firstDayOfMonth.setDate(today.getDate() - today.getDate() + 1);
+      // This variable is used once as the argument the initial call of renderDayRows. 
+      // Subsquent renders pass the first day of each month. I think I could abstract this further. 
 
     const renderDayRows = (start) => {
       const startYear = start.getFullYear();
@@ -38,8 +39,9 @@ const renderCalendar = () => {
       const last = new Date(startYear, startMonth + 1, 0);
       const lastDate = last.getDate();
       let currentDay = 1;
-
-
+      
+      // Would try to avoid a nested loop in a future iteration, 
+      // but in considering performance I know that the maximum iterations will be constant at 42, so I think it's safe here.
       for (let i = 0; i < 6; i++) {
         const tr = document.createElement('tr');
 
@@ -74,7 +76,7 @@ const renderCalendar = () => {
 
     const clearMonthYearHeader = () => {
       const monthYear = document.getElementsByTagName('h1')[0];
-      monthYear.innerHTML = "";
+      monthYear.remove();
     }
 
     const renderButtons = () => {
@@ -97,7 +99,6 @@ const renderCalendar = () => {
 
           self.addEventListener('click', function (event) {  
               event.preventDefault();
-
               clearTable();
               renderDaysOfWeekHeaders();
               clearMonthYearHeader();
@@ -126,6 +127,7 @@ const renderCalendar = () => {
       }
     }
 
+    //calls for the initial render
     renderDaysOfWeekHeaders();
     renderButtons();
     initButtonEvents();
