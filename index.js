@@ -29,7 +29,7 @@ const renderCalendar = () => {
     let today = new Date();
     const firstDayOfMonth = new Date();
     firstDayOfMonth.setDate(today.getDate() - today.getDate() + 1);
-      // This variable is used once as the argument the initial call of renderDayRows. 
+      // This variable is used once as the argument for the initial call of renderDayRows. 
       // Subsquent renders pass the first day of each month. I think I could abstract this further. 
 
     const renderDayRows = (start) => {
