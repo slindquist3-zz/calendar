@@ -21,7 +21,6 @@ const renderCalendar = () => {
       for (let i = 0; i < daysOfWeek.length; i++) {
         let day = daysOfWeek[i];
         let th = document.createElement('th');
-        th.setAttribute('id', day)
         th.appendChild(document.createTextNode(day))
         headerEl.appendChild(th);
       }
